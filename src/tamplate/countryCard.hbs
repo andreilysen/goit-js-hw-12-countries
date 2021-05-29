@@ -6,8 +6,8 @@
       <li class='list__item'>Population: <p class="list__item-text">{{population}}</p> </li>
       <li class='list__item'>Languages: 
         <ul class="list">
-          {{#each languages}}
-            <li>{{name}}<li>
+          {{#each this.languages}}
+            <li>{{this.name}}<li>
           {{/each}}
         </ul>
       </li>
