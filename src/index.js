@@ -10,9 +10,10 @@ import debounce from 'lodash.debounce';
 
 const refs = getRefs();
 refs.countName.addEventListener('input', debounce(searchCountry, 500));
+// Function
 function searchCountry(e) {
   e.preventDefault();
-  const searchQuery = e.target.value;
+  const searchQuery = e.target.value.trim();
   if (searchQuery.length === 0) {
     return (refs.countCard.innerHTML = '');
   }
@@ -28,6 +29,7 @@ function searchCountry(e) {
 }
 
 function renderCard(country) {
+  refs.countName.value = '';
   const markupCard = countryCardTpl(...country);
   refs.countCard.innerHTML = markupCard;
 }

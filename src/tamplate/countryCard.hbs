@@ -1,13 +1,17 @@
 <h1>{{name}}</h1>
 <div class='container'>
   <div>
-    <ul class="list">
-      <li class='list__item'>Capital: <p class="list__item-text">{{capital}}</p> </li>
-      <li class='list__item'>Population: <p class="list__item-text">{{population}}</p> </li>
-      <li class='list__item'>Languages: 
-        <ul class="list">
+    <ul class='list'>
+      <li class='list__item'>Capital:
+        <p class='list__item-text'>{{capital}}</p>
+      </li>
+      <li class='list__item'>Population:
+        <p class='list__item-text'>{{population}}</p>
+      </li>
+      <li class='list__item'>Languages:
+        <ul class='list list__lang'>
           {{#each this.languages}}
-            <li>{{this.name}}<li>
+            <li>{{this.name}}</li>
           {{/each}}
         </ul>
       </li>

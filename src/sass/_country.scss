@@ -1,9 +1,14 @@
+body {
+  background-color: hsl(120, 60%, 70%);
+}
+
 .country {
   &__input {
     width: 300px;
     border: 1px solid black;
     border-radius: 4px;
     padding: 15px;
+    background-color: transparent;
   }
   &__input:hover {
     border-color: blue;
@@ -33,5 +38,8 @@
     font-weight: 500;
     margin: 0;
     margin-left: 10px;
+  }
+  &__lang {
+    margin-left: 20px;
   }
 }
