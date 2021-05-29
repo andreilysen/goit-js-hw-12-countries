@@ -1,0 +1,37 @@
+.country {
+  &__input {
+    width: 300px;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 15px;
+  }
+  &__input:hover {
+    border-color: blue;
+  }
+}
+.container {
+  display: flex;
+}
+.img {
+  width: 500px;
+  height: 300px;
+  margin-left: 30px;
+}
+.list {
+  padding: 10px;
+}
+.list {
+  &__item {
+    display: flex;
+    list-style: none;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.17;
+    letter-spacing: 0.02em;
+  }
+  &__item-text {
+    font-weight: 500;
+    margin: 0;
+    margin-left: 10px;
+  }
+}
