@@ -230,7 +230,9 @@ exports.default = void 0;
 
 function fetchCountries(name) {
   return fetch("https://restcountries.eu/rest/v2/name/".concat(name)).then(function (response) {
-    return response.json();
+    if (response.ok) {
+      return response.json();
+    }
   }).catch(function (error) {
     console.error('Error: ', error);
   });
@@ -2885,23 +2887,31 @@ function searchCountry(e) {
   e.preventDefault();
   var searchQuery = e.target.value.trim();
 
-  if (searchQuery.length === 0) {
-    return refs.countCard.innerHTML = '';
-  }
-
-  if (searchQuery.length === 1) {
+  if (searchQuery.length < 2) {
+    refs.countCard.innerHTML = '';
     refs.countCard.innerHTML = '';
     return (0, _core.error)('Too many matches found. Please enter a more specific query!');
   }
 
-  if (searchQuery.length === 2) {
-    return _fetchCountries.default.fetchCountries(searchQuery).then(renderList);
-  }
+  _fetchCountries.default.fetchCountries(searchQuery).then(function (countries) {
+    if (!countries) {
+      return errorCount();
+    }
 
-  _fetchCountries.default.fetchCountries(searchQuery).then(renderCard);
+    if (countries.length >= 2 && countries.length <= 10) {
+      //   console.log(countries);
+      refs.countCard.innerHTML = '';
+      renderList(countries);
+    }
+
+    if (countries.length === 1) {
+      renderCard(countries);
+    }
+  });
 }
 
 function renderCard(country) {
+  console.log(country);
   refs.countName.value = '';
 
   var markupCard = _countryCard.default.apply(void 0, _toConsumableArray(country));
@@ -2912,6 +2922,10 @@ function renderCard(country) {
 function renderList(searchQuery) {
   var markupList = (0, _countryList.default)(searchQuery);
   refs.countCard.innerHTML = markupList;
+}
+
+function errorCount() {
+  refs.countCard.innerHTML = 'Not found';
 }
 },{"./sass/main.scss":"sass/main.scss","@pnotify/core/dist/PNotify.css":"../node_modules/@pnotify/core/dist/PNotify.css","@pnotify/core/dist/BrightTheme.css":"../node_modules/@pnotify/core/dist/BrightTheme.css","@pnotify/core":"../node_modules/@pnotify/core/dist/PNotify.js","./js/refs.js":"js/refs.js","./js/fetchCountries.js":"js/fetchCountries.js","./tamplate/countryCard.hbs":"tamplate/countryCard.hbs","./tamplate/countryList.hbs":"tamplate/countryList.hbs","lodash.debounce":"../node_modules/lodash.debounce/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -2941,7 +2955,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "5002" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "7261" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
