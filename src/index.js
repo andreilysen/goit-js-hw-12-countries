@@ -39,7 +39,7 @@ function searchCountry(e) {
 
 function renderCard(country) {
   console.log(country);
-  refs.countName.value = '';
+  //   refs.countName.value = '';
   const markupCard = countryCardTpl(...country);
   refs.countCard.innerHTML = markupCard;
 }
