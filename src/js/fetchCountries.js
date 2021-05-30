@@ -4,6 +4,7 @@ function fetchCountries(name) {
       if (response.ok) {
         return response.json();
       }
+      throw new Error('Error fetching data');
     })
     .catch(error => {
       console.error('Error: ', error);
