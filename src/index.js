@@ -14,27 +14,36 @@ refs.countName.addEventListener('input', debounce(searchCountry, 500));
 // Function
 
 function searchCountry(e) {
-  e.preventDefault();
+  refs.countCard.innerHTML = '';
   const searchQuery = e.target.value.trim();
-  if (searchQuery.length < 2) {
+  if (searchQuery.length === 0) {
     refs.countCard.innerHTML = '';
-    refs.countCard.innerHTML = '';
-    return error('Too many matches found. Please enter a more specific query!');
+    return;
   }
-  API.fetchCountries(searchQuery).then(countries => {
-    if (!countries) {
-      return errorCount();
-    }
+  API.fetchCountries(searchQuery)
+    .then(countries => {
+      //   if (!countries) {
+      //     return;
+      //   }
+      if (countries.length > 10) {
+        return error(
+          'Too many matches found. Please enter a more specific query!',
+        );
+      }
 
-    if (countries.length >= 2 && countries.length <= 10) {
-      //   console.log(countries);
-      refs.countCard.innerHTML = '';
-      renderList(countries);
-    }
-    if (countries.length === 1) {
-      renderCard(countries);
-    }
-  });
+      if (countries.length >= 2 && countries.length <= 10) {
+        //   console.log(countries);
+
+        renderList(countries);
+      }
+      if (countries.length === 1) {
+        renderCard(countries);
+      }
+    })
+    .catch(error => {
+      errorCount();
+      console.error('Error: ', error);
+    });
 }
 
 function renderCard(country) {
