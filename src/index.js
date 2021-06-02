@@ -17,7 +17,6 @@ function searchCountry(e) {
   refs.countCard.innerHTML = '';
   const searchQuery = e.target.value.trim();
   if (searchQuery.length === 0) {
-    refs.countCard.innerHTML = '';
     return;
   }
   API.fetchCountries(searchQuery)
